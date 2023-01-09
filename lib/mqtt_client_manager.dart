@@ -1,11 +1,12 @@
 import 'dart:io';
-
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
 class MQTTClientManager {
   MqttServerClient client =
-  MqttServerClient.withPort('10.0.2.2', 'mobile_client', 1883);
+  MqttServerClient.withPort('ccb344cc6e3146128821f142b7d7ab11.s2.eu.hivemq.cloud', 'mobile_client', 8883);
+  String username = '3acc3ff771b74cb28e8b12ba97c13939';
+  String password = '7a389fec5e204cd3838597dac5462e94';
 
   Future<int> connect() async {
     client.logging(on: true);
@@ -20,7 +21,7 @@ class MQTTClientManager {
     client.connectionMessage = connMessage;
 
     try {
-      await client.connect();
+      await client.connect(username, password);
     } on NoConnectionException catch (e) {
       print('MQTTClient::Client exception - $e');
       client.disconnect();
